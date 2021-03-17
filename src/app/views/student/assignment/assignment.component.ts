@@ -90,7 +90,7 @@ export class AssignmentComponent implements OnInit {
 	}
 
 
-	public createAssignment(): void {
+	public async createAssignment(): Promise<void>{
 		var assignment: IAssignment = {
 			alumn: this.alumnControl.value,
 			assignment: this.assignmentControl.value as Assignments,
@@ -102,7 +102,19 @@ export class AssignmentComponent implements OnInit {
 			firebaseId:'',
 		}
 
-		this.db.add(assignment)
+		let assignments = await this.db.getAssignmentsByAlumn_sync(this.alumnControl.value);
+		let flag: boolean = true;
+
+		
+		for(let assignment of assignments){
+			if(assignment.assignment == this.assignmentControl.value){
+				flag = false;
+				break;
+			}
+		}
+
+		if(flag){
+			this.db.add(assignment)
 			.then(() => {
 				this.toastr.success('', 'Materia asignada con éxito', {
 					timeOut: 5000,
@@ -118,6 +130,14 @@ export class AssignmentComponent implements OnInit {
 			.finally(() => {
 				this.router.navigate(['/student/assignment/list']);
 			})
+		}
+		else{
+			this.toastr.info('', 'Anteriormente fue enviada esta asignación a la materia', {
+				timeOut: 5000,
+				positionClass: 'toast-bottom-right',
+			});
+		}
+
 	}
 
 	public goToList(): void {
