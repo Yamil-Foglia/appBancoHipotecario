@@ -16,6 +16,7 @@ import { AssignmentComponent } from './views/student/assignment/assignment.compo
 import { DashboardComponent } from './views/teacher/dashboard/dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AssigmentListComponent } from './views/student/assigment-list/assigment-list.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		LoginComponent,
 		AssignmentComponent,
 		DashboardComponent,
+		AssigmentListComponent,
 	],
 	imports: [
 		AngularFireModule.initializeApp(environment.firebase),

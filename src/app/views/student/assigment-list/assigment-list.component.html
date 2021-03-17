@@ -1,0 +1,31 @@
+<!-- for PC -->
+<div class="d-none d-sm-block h-100">
+    <div class="container-fluid">
+        <div class="row ta-c mt-3">
+            <div class="col-3"></div>
+            <div class="col">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Materia</th>
+                            <th scope="col">Turno</th>
+                            <th scope="col">Dia</th>
+                            <th scope="col">Profesor</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let assignment of assignmentList">
+                            <td><h6>{{assignment.assignment}}</h6> </td>
+                            <td><h6>{{assignment.turn}}</h6></td>
+                            <td><h6>{{assignment.day}}</h6></td>
+                            <td><h6>{{assignment.teacher}}</h6></td>
+                            <td><h6>{{assignment.state}}</h6></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>

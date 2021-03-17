@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Assignments, Days, IAssignment, Teachers, Turn } from 'src/app/core/entities';
+import { Assignments, Days, IAssignment, State, Teachers, Turn } from 'src/app/core/entities';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AssignmentsService } from 'src/app/services/assignments.service';
@@ -93,7 +93,9 @@ export class AssignmentComponent implements OnInit {
 			assignment: this.assignmentControl.value as Assignments,
 			teacher: this.teacherControl.value as Teachers,
 			day: this.dayControl.value as Days,
-			turn: this.turnControl.value as Turn
+			turn: this.turnControl.value as Turn,
+			state: State.EnEspera,
+			firebaseTimestamp: Date.now(),
 		}
 
 		this.db.add(assignment)
@@ -102,7 +104,6 @@ export class AssignmentComponent implements OnInit {
 					timeOut: 5000,
 					positionClass: 'toast-bottom-right',
 				});
-				this.router.navigate(['/']);
 			})
 			.catch(() => {
 				this.toastr.error('', 'Se produjo un conflicto al asignar la materia.', {
@@ -110,6 +111,13 @@ export class AssignmentComponent implements OnInit {
 					positionClass: 'toast-bottom-right',
 				});
 			})
+			.finally(() => {
+				this.router.navigate(['/student/assignment/list']);
+			})
+	}
+
+	public goToList(): void {
+		this.router.navigate(['/student/assignment/list']);
 	}
 
 }

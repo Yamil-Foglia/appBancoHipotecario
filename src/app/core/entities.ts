@@ -37,11 +37,18 @@ export enum Teachers {
     LorenaLago = 'Lorena Lago',
     JosefinaRojas = 'Josefina Rojas',
 }
+
+export enum State {
+    Aprobado = 'Aprobado',
+    Rechazado = 'Rechazado',
+    EnEspera = 'En espera',
+}
 export interface IAssignment extends IFirebaseObject {
     assignment: Assignments;
     teacher: Teachers; 
     day: Days;
     turn: Turn; 
+    state: State;
 }
 
 
