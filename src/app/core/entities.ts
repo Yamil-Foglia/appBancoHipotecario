@@ -1,6 +1,6 @@
 export interface IFirebaseObject {
-    firebaseId?: string;
-    firebaseTimestamp?: number;
+    firebaseId: string;
+    firebaseTimestamp: number;
 }
 
 export enum Turn {

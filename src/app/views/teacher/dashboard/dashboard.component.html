@@ -32,58 +32,67 @@
         <div class="row ta-c mt-4" *ngIf="selectAssignments">
             <div class="col-3"></div>
             <div class="col">
-                <div class="card w-100">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h5 style="color: rgb(119, 119, 119);">{{assigment}}</h5>
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <table class="table table-striped table-dark">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">
-                                                <h5>Alumno</h5>
-                                            </th>
-                                            <th scope="col">
-                                                <h5>Dia</h5>
-                                            </th>
-                                            <th scope="col">
-                                                <h5>Profesor</h5>
-                                            </th>
-                                            <th scope="col">
-                                                <h5>Turno</h5>
-                                            </th>
-                                            <th scope="col">
-                                                <h5>Estado</h5>
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let assignment of assigmentList">
-                                            <td>
-                                                <h6>{{assignment.alumn}}</h6>
-                                            </td>
-                                            <td>
-                                                <h6>{{assignment.day}}</h6>
-                                            </td>
-                                            <td>
-                                                <h6>{{assignment.teacher}}</h6>
-                                            </td>
-                                            <td>
-                                                <h6>{{assignment.turn}}</h6>
-                                            </td>
-                                            <td >
-                                                <div [AppIconState]="assignment.state"></div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col">
+                        <h5>{{assigment}}</h5>
+                        <hr style=" border-top: 1px solid rgba(0, 0, 0, 0.363);">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <h5>Alumno</h5>
+                                    </th>
+                                    <th scope="col">
+                                        <h5>Dia</h5>
+                                    </th>
+                                    <th scope="col">
+                                        <h5>Turno</h5>
+                                    </th>
+                                    <th scope="col">
+                                        <h5>Estado</h5>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assignment of assigmentList">
+                                    <td>
+                                        <h6>{{assignment.alumn}}</h6>
+                                    </td>
+                                    <td>
+                                        <h6>{{assignment.day}}</h6>
+                                    </td>
+                                    <td>
+                                        <h6>{{assignment.turn}}</h6>
+                                    </td>
+                                    <td >
+                                        <div [AppIconState]="assignment.state"></div>
+                                    </td>
+                                    <div *ngIf="assignment.state == 'En espera'">
+                                        <td>
+                                            <button type="button" class="btn btn-success w-100" (click)="changeState(1, assignment)">Aceptar</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger w-100"(click)="changeState(0, assignment)">Rechazar</button>
+                                        </td>
+                                    </div>
+                                    <div *ngIf="assignment.state == 'Rechazado'">
+                                        <td>
+                                            <button type="button" class="btn btn-success w-100" (click)="changeState(1, assignment)">Aceptar</button>
+                                        </td>
+                                    </div>
+                                    <div *ngIf="assignment.state == 'Aprobado'">
+                                        <td>
+                                            <button type="button" class="btn btn-danger w-100" (click)="changeState(0, assignment)">Rechazar</button>
+                                        </td>
+                                    </div>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

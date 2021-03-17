@@ -99,6 +99,7 @@ export class AssignmentComponent implements OnInit {
 			turn: this.turnControl.value as Turn,
 			state: State.EnEspera,
 			firebaseTimestamp: Date.now(),
+			firebaseId:'',
 		}
 
 		this.db.add(assignment)

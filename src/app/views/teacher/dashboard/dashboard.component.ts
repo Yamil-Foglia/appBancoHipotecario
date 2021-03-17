@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Assignments, IAssignment, Teachers } from 'src/app/core/entities';
+import { Assignments, IAssignment, State, Teachers } from 'src/app/core/entities';
 import { AssignmentsService } from 'src/app/services/assignments.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-dashboard',
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
 	public assigmentList: IAssignment[];
 
-	constructor(private db: AssignmentsService) { }
+	constructor(private db: AssignmentsService, private toastr: ToastrService, private router: Router) { }
 
 	ngOnInit(): void {
 		this.teacherList = Object.values(Teachers).map(value => value);
@@ -57,6 +59,45 @@ export class DashboardComponent implements OnInit {
 	}
 
 	private async getAssignments(): Promise<void> {
-		this.assigmentList = await this.db.getByAssignments_sync(this.assigment);
+		this.assigmentList = await this.db.getAssignmentsByTeacher_sync(this.teacher);
+	}
+
+	public changeState(state: number, assigment: IAssignment): void {
+		if(state == 0){
+			this.db.changeState(assigment.firebaseId, State.Rechazado)
+				.then(() => {
+					this.toastr.success('', 'Opereación realizada con éxito', {
+						timeOut: 5000,
+						positionClass: 'toast-bottom-right',
+					});
+				})
+				.catch(() => {
+					this.toastr.error('', 'Se produjo un conflicto al realizada la opereación.', {
+						timeOut: 5000,
+						positionClass: 'toast-bottom-right',
+					});
+				})
+				.finally(() => {
+					this.getAssignments();
+				});
+		}
+		else{
+			this.db.changeState(assigment.firebaseId, State.Aprobado)
+				.then(() => {
+					this.toastr.success('', 'Opereación realizada con éxito', {
+						timeOut: 5000,
+						positionClass: 'toast-bottom-right',
+					});
+				})
+				.catch(() => {
+					this.toastr.error('', 'Se produjo un conflicto al realizada la opereación.', {
+						timeOut: 5000,
+						positionClass: 'toast-bottom-right',
+					});
+				})
+				.finally(() => {
+					this.getAssignments();
+				});
+		}
 	}
 }
