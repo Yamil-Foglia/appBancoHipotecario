@@ -10,8 +10,8 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Materia</label>
-                                    <select class="form-control" formControlName="assignment">
-                                      <option *ngFor="let assignment of assignmentList" [value]="assignment">
+                                    <select class="form-control" formControlName="assignment" (change)="selectAssignment()">
+                                      <option *ngFor="let assignment of assignmentList" [value]="assignment" >
                                         {{assignment}}
                                       </option>
                                     </select>
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="assignmentSelect">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Profesor</label>

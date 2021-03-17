@@ -31,6 +31,11 @@ export enum Teachers {
     MariaGonzalez = 'Maria Gonzalez',
     LauraFoglia = 'Laura Foglia',
     PedroHerrera = 'Pedro Herrera',
+    MarioHernandez = 'Mario Hernandez',
+    FedericoDavila = 'Federico Davila',
+    MartaTicoli = 'Marta Ticoli',
+    LorenaLago = 'Lorena Lago',
+    JosefinaRojas = 'Josefina Rojas',
 }
 export interface IAssignment extends IFirebaseObject {
     assignment: Assignments;

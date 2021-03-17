@@ -17,6 +17,8 @@ export class AssignmentComponent implements OnInit {
 	public teacherList: string[];
 	public dayList: string[];
 
+	public assignmentSelect: boolean = false;
+
 	public assignmentForm: FormGroup;
 	
 	public assignmentControl: FormControl = new FormControl('', [Validators.required]);
@@ -43,9 +45,48 @@ export class AssignmentComponent implements OnInit {
 	private buildLists(): void {
 		this.assignmentList = Object.values(Assignments).map(value => value);
 		this.turnList = Object.values(Turn).map(value => value);
-		this.teacherList = Object.values(Teachers).map(value => value);
-		this.dayList = Object.values(Days).map(value => value);
 	}
+
+	public selectAssignment(): void {
+		this.assignmentSelect = true;
+
+		this.teacherList = [];
+		this.dayList = [];
+
+		switch(this.assignmentControl.value){
+			case Assignments.Matematicas:
+				this.teacherList.push(Teachers.EmanuelFernandez);
+				this.teacherList.push(Teachers.FedericoDavila);
+				this.dayList.push(Days.Lunes);
+				this.dayList.push(Days.Jueves);
+				break;
+			case Assignments.Estadistica:
+				this.teacherList.push(Teachers.JosefinaRojas);
+				this.teacherList.push(Teachers.LauraFoglia);
+				this.dayList.push(Days.Martes);
+				this.dayList.push(Days.Viernes);
+				break;
+			case Assignments.Programacion:
+				this.teacherList.push(Teachers.LorenaLago);
+				this.teacherList.push(Teachers.MariaGonzalez);
+				this.dayList.push(Days.Miercoles);
+				this.dayList.push(Days.Lunes);
+				break;
+			case Assignments.Literatura:
+				this.teacherList.push(Teachers.MarioHernandez);
+				this.teacherList.push(Teachers.MartaTicoli);
+				this.dayList.push(Days.Jueves);
+				this.dayList.push(Days.Martes);
+				break;
+			case Assignments.Laboratorio:
+				this.teacherList.push(Teachers.OscarLema);
+				this.teacherList.push(Teachers.PedroHerrera);
+				this.dayList.push(Days.Viernes);
+				this.dayList.push(Days.Miercoles);
+				break;
+		}
+	}
+
 
 	public createAssignment(): void {
 		var assignment: IAssignment = {
