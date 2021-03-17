@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Assignments, Days, IAssignment, Teachers, Turn } from 'src/app/core/entities';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AssignmentsService } from 'src/app/services/assignments.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-assignment',
@@ -22,7 +24,7 @@ export class AssignmentComponent implements OnInit {
 	public teacherControl: FormControl = new FormControl('', [Validators.required]);
 	public dayControl: FormControl = new FormControl('', [Validators.required]);
 
-	constructor(private router: Router) { }
+	constructor(private db: AssignmentsService, private toastr: ToastrService, private router: Router) { }
 
 	ngOnInit(): void {
 		this.initialize();
@@ -52,6 +54,21 @@ export class AssignmentComponent implements OnInit {
 			day: this.dayControl.value as Days,
 			turn: this.turnControl.value as Turn
 		}
+
+		this.db.add(assignment)
+			.then(() => {
+				this.toastr.success('', 'Materia asignada con éxito', {
+					timeOut: 5000,
+					positionClass: 'toast-bottom-right',
+				});
+				this.router.navigate(['/']);
+			})
+			.catch(() => {
+				this.toastr.error('', 'Se produjo un conflicto al asignar la materia.', {
+					timeOut: 5000,
+					positionClass: 'toast-bottom-right',
+				});
+			})
 	}
 
 }
