@@ -1,1 +1,68 @@
-<p>assignment works!</p>
+<!-- for PC -->
+<div class="d-none d-sm-block h-100">
+    <div class="container-fluid" [formGroup]="assignmentForm">
+        <div class="row ta-c mt-5">
+            <div class="col-3"></div>
+            <div class="col">
+                <div class="card w-100">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Materia</label>
+                                    <select class="form-control" formControlName="assignment">
+                                      <option *ngFor="let assignment of assignmentList" [value]="assignment">
+                                        {{assignment}}
+                                      </option>
+                                    </select>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Turno</label>
+                                    <select class="form-control" formControlName="turn">
+                                      <option *ngFor="let turn of turnList" [value]="turn">
+                                        {{turn}}
+                                      </option>
+                                    </select>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Profesor</label>
+                                    <select class="form-control" formControlName="teacher">
+                                      <option *ngFor="let teacher of teacherList" [value]="teacher">
+                                        {{teacher}}
+                                      </option>
+                                    </select>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Día</label>
+                                    <select class="form-control" formControlName="day">
+                                      <option *ngFor="let day of dayList" [value]="day">
+                                        {{day}}
+                                      </option>
+                                    </select>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col">
+                                <button type="button" class="btn btn-success w-100" (click)="createAssignment()" [disabled]="assignmentForm.invalid">Inscribirse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+    </div>
+</div>

@@ -3,15 +3,42 @@ export interface IFirebaseObject {
     firebaseTimestamp?: number;
 }
 
-export enum TurnType {
+export enum Turn {
     Mañana = 'Mañana',
     Tarde = 'Tarde',
     Noche = 'Noche',
 }
 
-export interface IAssignment extends IFirebaseObject {
-    assignment: string;
-    teacher: string; 
-    day: string;
-    turn: TurnType; 
+export enum Assignments {
+    Matematicas = 'Matematicas',
+    Estadistica = 'Estadistica',
+    Literatura = 'Literatura',
+    Programacion = 'Programacion',
+    Laboratorio = 'Laboratorio',
 }
+
+export enum Days {
+    Lunes = 'Lunes',
+    Martes = 'Martes',
+    Miercoles = 'Miercoles',
+    Jueves = 'Jueves',
+    Viernes = 'Viernes',
+}
+
+export enum Teachers {
+    OscarLema = 'Oscar Lema',
+    EmanuelFernandez = 'Emanuel Fernandez',
+    MariaGonzalez = 'Maria Gonzalez',
+    LauraFoglia = 'Laura Foglia',
+    PedroHerrera = 'Pedro Herrera',
+}
+export interface IAssignment extends IFirebaseObject {
+    assignment: Assignments;
+    teacher: Teachers; 
+    day: Days;
+    turn: Turn; 
+}
+
+
+
+
