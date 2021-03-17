@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { IAssignment } from '../core/entities';
 import { Helpers } from '../core/helpers';
 
@@ -26,4 +26,18 @@ export class AssignmentsService {
                 return assignments;
             });
     }
+
+    public getByAssignments_sync(assignment: string): Promise<IAssignment[]> {
+        return this.db.collection('assignments', ref => ref.where('assignment', '==', assignment)).get().toPromise()
+            .then(query => {
+                let assignments: IAssignment[] = [];
+                query.docs.forEach(doc => {
+                    let assignment = doc.data() as IAssignment;
+                    assignment.firebaseId = doc.id;
+                    assignments.push(assignment);
+                });
+                return assignments;
+            });
+    }
+
 }

@@ -21,6 +21,7 @@ export class AssignmentComponent implements OnInit {
 
 	public assignmentForm: FormGroup;
 	
+	public alumnControl: FormControl = new FormControl('', [Validators.required]);
 	public assignmentControl: FormControl = new FormControl('', [Validators.required]);
 	public turnControl: FormControl = new FormControl('', [Validators.required]);
 	public teacherControl: FormControl = new FormControl('', [Validators.required]);
@@ -35,6 +36,7 @@ export class AssignmentComponent implements OnInit {
 	private initialize(): void {
 		this.buildLists();
 		this.assignmentForm = new FormGroup({
+			'alumn': this.alumnControl,
 			'assignment': this.assignmentControl,
 			'turn': this.turnControl,
 			'teacher': this.teacherControl,
@@ -90,6 +92,7 @@ export class AssignmentComponent implements OnInit {
 
 	public createAssignment(): void {
 		var assignment: IAssignment = {
+			alumn: this.alumnControl.value,
 			assignment: this.assignmentControl.value as Assignments,
 			teacher: this.teacherControl.value as Teachers,
 			day: this.dayControl.value as Days,

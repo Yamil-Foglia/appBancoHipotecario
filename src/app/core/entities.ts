@@ -44,6 +44,7 @@ export enum State {
     EnEspera = 'En espera',
 }
 export interface IAssignment extends IFirebaseObject {
+    alumn: string;
     assignment: Assignments;
     teacher: Teachers; 
     day: Days;

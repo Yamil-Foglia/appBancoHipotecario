@@ -4,23 +4,43 @@
         <div class="row ta-c mt-3">
             <div class="col-3"></div>
             <div class="col">
-                <table class="table table-dark">
+                <table class="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">Materia</th>
-                            <th scope="col">Turno</th>
-                            <th scope="col">Dia</th>
-                            <th scope="col">Profesor</th>
-                            <th scope="col">Estado</th>
+                            <th scope="col">
+                                <h5>Materia</h5>
+                            </th>
+                            <th scope="col">
+                                <h5>Turno</h5>
+                            </th>
+                            <th scope="col">
+                                <h5>Dia</h5>
+                            </th>
+                            <th scope="col">
+                                <h5>Profesor</h5>
+                            </th>
+                            <th scope="col">
+                                <h5>Estado</h5>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let assignment of assignmentList">
-                            <td><h6>{{assignment.assignment}}</h6> </td>
-                            <td><h6>{{assignment.turn}}</h6></td>
-                            <td><h6>{{assignment.day}}</h6></td>
-                            <td><h6>{{assignment.teacher}}</h6></td>
-                            <td><h6>{{assignment.state}}</h6></td>
+                            <td>
+                                <h6>{{assignment.assignment}}</h6>
+                            </td>
+                            <td>
+                                <h6>{{assignment.turn}}</h6>
+                            </td>
+                            <td>
+                                <h6>{{assignment.day}}</h6>
+                            </td>
+                            <td>
+                                <h6>{{assignment.teacher}}</h6>
+                            </td>
+                            <td >
+                                <div [AppIconState]="assignment.state"></div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
